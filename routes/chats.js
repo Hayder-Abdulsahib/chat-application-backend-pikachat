@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const upload = require("../middleware/multer");
+const passport = require("passport");
 
 const {
   chatFetch,
@@ -24,7 +25,12 @@ router.param("chatId", async (req, res, next, chatId) => {
 
 router.get("/", chatList);
 
-router.post("/", upload.single("image"), ChatCreate);
+router.post(
+  "/",
+  upload.single("image"),
+  passport.authenticate("jwt", { session: false }),
+  ChatCreate
+);
 
 router.delete("/:chatId", chatDelete);
 
