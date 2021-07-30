@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       unique: true,
     },
-    profileImage: {
+    image: {
       type: DataTypes.STRING,
     },
     isOnLine: {

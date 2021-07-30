@@ -10,11 +10,7 @@ module.exports = {
       },
       text: Sequelize.STRING,
       image: Sequelize.STRING,
-      time: {
-        allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW,
-      },
+
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
