@@ -20,5 +20,15 @@ module.exports = (sequelize, DataTypes) => {
   sequelizeSlugify.slugifyModel(Profile, {
     source: ["username"],
   });
+
+  Profile.associate = (models) => {
+    models.User.hasOne(Profile, {
+      foreignKey: "userId",
+      alloNull: false,
+    });
+
+    Profile.belongsTo(models.User, { foreignKey: "userId" });
+  };
+
   return Profile;
 };
