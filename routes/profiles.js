@@ -1,6 +1,7 @@
 const express = require("express");
 const upload = require("../middleware/multer");
 const router = express.Router();
+const passport = require("passport");
 
 const {
   profileData,
@@ -25,8 +26,18 @@ router.param("profileId", async (req, res, next, profileId) => {
 //profile detail
 router.get("/:profileId", profileData);
 // Add
-router.post("/", upload.single("profileImage"), profileAdd);
+router.post(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  upload.single("image"),
+  profileAdd
+);
 //update
-router.put("/:profileId", upload.single("profileImage"), profileUpdate);
+router.put(
+  "/:profileId",
+  passport.authenticate("jwt", { session: false }),
+  upload.single("image"),
+  profileUpdate
+);
 
 module.exports = router;

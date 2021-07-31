@@ -5,7 +5,7 @@ const passport = require("passport");
 
 const {
   chatFetch,
-  ChatCreate,
+  chatCreate,
   chatList,
   chatDelete,
 } = require("../controllers/chatController");
@@ -29,9 +29,13 @@ router.post(
   "/",
   upload.single("image"),
   passport.authenticate("jwt", { session: false }),
-  ChatCreate
+  chatCreate
 );
 
-router.delete("/:chatId", chatDelete);
+router.delete(
+  "/:chatId",
+  passport.authenticate("jwt", { session: false }),
+  chatDelete
+);
 
 module.exports = router;

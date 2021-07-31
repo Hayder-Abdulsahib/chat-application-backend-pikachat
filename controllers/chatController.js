@@ -9,7 +9,6 @@ exports.chatFetch = async (chatId, next) => {
   }
 };
 
-
 exports.chatList = async (req, res, next) => {
   try {
     const chats = await Chat.findAll({
@@ -30,7 +29,7 @@ exports.chatDelete = async (req, res, next) => {
   }
 };
 
-exports.ChatCreate = async (req, res, next) => {
+exports.chatCreate = async (req, res, next) => {
   try {
     if (req.file) {
       req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;

@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const upload = require("../middleware/multer");
+const passport = require("passport");
 
 const {
   messageCreate,
@@ -22,12 +23,21 @@ router.param("messageId", async (req, res, next, messageId) => {
   }
 });
 
-router.post("/", upload.single("image"), messageCreate);
+router.post(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  upload.single("image"),
+  messageCreate
+);
 
 router.get("/", messageList);
 
 router.get("/:messageId", messageDetail);
 
-router.delete("/:messageId", messageDelete);
+router.delete(
+  "/:messageId",
+  passport.authenticate("jwt", { session: false }),
+  messageDelete
+);
 
 module.exports = router;

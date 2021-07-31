@@ -16,6 +16,13 @@ exports.profileData = async (req, res) => res.json(req.profile);
 //Update
 exports.profileUpdate = async (req, res, next) => {
   try {
+    if (req.profile.userId !== req.user.id) {
+      //this condition is used to test the token if it belogns to the user that create the account
+      throw {
+        status: 401,
+        message: "you can't add profile to an account that not yours",
+      };
+    }
     if (req.file) {
       req.body.profileImage = `http://${req.get("host")}/media/${
         req.file.filename
@@ -32,10 +39,9 @@ exports.profileUpdate = async (req, res, next) => {
 exports.profileAdd = async (req, res, next) => {
   try {
     if (req.file) {
-      req.body.profileImage = `http://${req.get("host")}/media/${
-        req.file.filename
-      }`;
+      req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
     }
+    req.body.userId = req.user.id;
     const profileAdd = await Profile.create(req.body);
     res.status(201).json(profileAdd);
   } catch (error) {
