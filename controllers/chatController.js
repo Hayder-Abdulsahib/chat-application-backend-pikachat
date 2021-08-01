@@ -11,8 +11,44 @@ exports.chatFetch = async (chatId, next) => {
 
 exports.chatList = async (req, res, next) => {
   try {
+    // const chats = await Chat.findAll({
+    //   // attributes: { exclude: ["createdAt", "updatedAt"] },
+    //   include: {
+    //     model: Message,
+    //     as: "messages",
+    //     // attributes: ["id"],
+    //     // we commit this because of react native
+    //   },
+    // });
     const chats = await Chat.findAll({
       // attributes: { exclude: ["createdAt", "updatedAt"] },
+      include: {
+        model: Message,
+        as: "messages",
+        // attributes: ["id"],
+        // we commit this because of react native
+      },
+    });
+    res.json(chats);
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.chatDetail = async (req, res, next) => {
+  try {
+    // const chats = await Chat.findAll({
+    //   // attributes: { exclude: ["createdAt", "updatedAt"] },
+    //   include: {
+    //     model: Message,
+    //     as: "messages",
+    //     // attributes: ["id"],
+    //     // we commit this because of react native
+    //   },
+    // });
+    const chats = await Chat.findOne({
+      // attributes: { exclude: ["createdAt", "updatedAt"] },
+      where: { id: req.params.chatId },
       include: {
         model: Message,
         as: "messages",

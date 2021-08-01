@@ -10,6 +10,7 @@ const {
   chatDelete,
   messageCreate,
   chatUsers,
+  chatDetail,
 } = require("../controllers/chatController");
 
 router.param("chatId", async (req, res, next, chatId) => {
@@ -26,6 +27,8 @@ router.param("chatId", async (req, res, next, chatId) => {
 });
 
 router.get("/", chatList);
+
+router.get("/:chatId", chatDetail);
 
 router.post(
   "/",

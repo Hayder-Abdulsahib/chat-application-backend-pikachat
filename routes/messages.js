@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const upload = require("../middleware/multer");
 const passport = require("passport");
 
 const {
@@ -8,7 +7,6 @@ const {
   messageDetail,
   messageFetch,
   messageList,
-  sendMessage,
 } = require("../controllers/messageController");
 
 router.param("messageId", async (req, res, next, messageId) => {
