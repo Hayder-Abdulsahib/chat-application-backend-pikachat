@@ -12,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
     image: {
       type: DataTypes.STRING,
     },
+    bio: {
+      type: DataTypes.STRING,
+    },
+
     isOnLine: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,

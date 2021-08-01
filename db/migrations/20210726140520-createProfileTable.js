@@ -14,6 +14,9 @@ module.exports = {
       image: {
         type: Sequelize.STRING,
       },
+      bio: {
+        type: Sequelize.STRING,
+      },
       isOnLine: {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
