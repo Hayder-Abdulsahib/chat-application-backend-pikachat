@@ -20,13 +20,11 @@ exports.profileUpdate = async (req, res, next) => {
       //this condition is used to test the token if it belogns to the user that create the account
       throw {
         status: 401,
-        message: "you can't add profile to an account that not yours",
+        message: "you can't update a profile that not yours",
       };
     }
     if (req.file) {
-      req.body.profileImage = `http://${req.get("host")}/media/${
-        req.file.filename
-      }`;
+      req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
     }
     await req.profile.update(req.body);
     res.status(201).json(req.profile);

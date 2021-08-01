@@ -8,7 +8,6 @@ const chatRoutes = require("./routes/chats");
 let profileRouter = require("./routes/profiles");
 const messageRoutes = require("./routes/messages");
 const userRoutes = require("./routes/users");
-const chatRoom_msgRoutes = require("./routes/ChatRoom_msg");
 
 //cors
 const cors = require("cors");
@@ -32,7 +31,6 @@ app.use("/profile", profileRouter);
 app.use("/chats", chatRoutes);
 app.use("/messages", messageRoutes);
 app.use(userRoutes);
-app.use(chatRoom_msgRoutes);
 
 app.use("/media", express.static("media"));
 

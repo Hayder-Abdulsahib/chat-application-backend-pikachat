@@ -8,6 +8,8 @@ const {
   chatCreate,
   chatList,
   chatDelete,
+  messageCreate,
+  chatUsers,
 } = require("../controllers/chatController");
 
 router.param("chatId", async (req, res, next, chatId) => {
@@ -36,6 +38,20 @@ router.delete(
   "/:chatId",
   passport.authenticate("jwt", { session: false }),
   chatDelete
+);
+
+router.post(
+  "/:chatId/messages",
+  passport.authenticate("jwt", { session: false }),
+  upload.single("image"),
+  messageCreate
+);
+
+//we need this
+router.post(
+  "/:chatId/userchat",
+  passport.authenticate("jwt", { session: false }),
+  chatUsers
 );
 
 module.exports = router;

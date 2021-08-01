@@ -4,11 +4,11 @@ const upload = require("../middleware/multer");
 const passport = require("passport");
 
 const {
-  messageCreate,
   messageDelete,
   messageDetail,
   messageFetch,
   messageList,
+  sendMessage,
 } = require("../controllers/messageController");
 
 router.param("messageId", async (req, res, next, messageId) => {
@@ -23,13 +23,6 @@ router.param("messageId", async (req, res, next, messageId) => {
   }
 });
 
-router.post(
-  "/",
-  passport.authenticate("jwt", { session: false }),
-  upload.single("image"),
-  messageCreate
-);
-
 router.get("/", messageList);
 
 router.get("/:messageId", messageDetail);
@@ -39,5 +32,12 @@ router.delete(
   passport.authenticate("jwt", { session: false }),
   messageDelete
 );
+
+// router.post(
+//   "/sendmessage",
+//   passport.authenticate("jwt", { session: false }),
+//   upload.single("image"),
+//   sendMessage
+// );
 
 module.exports = router;
