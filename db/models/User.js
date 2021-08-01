@@ -16,5 +16,15 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
   });
+
+  User.associate = (models) => {
+    User.hasMany(models.Message, {
+      foreignKey: "userId",
+      allowNull: false,
+    });
+
+    models.Message.belongsTo(User, { foreignKey: "userId" });
+  };
+
   return User;
 };

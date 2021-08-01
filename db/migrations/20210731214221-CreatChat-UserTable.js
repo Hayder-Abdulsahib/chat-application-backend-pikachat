@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("Rooms", {
+    await queryInterface.createTable("Connects", {
       chatId: {
         type: Sequelize.INTEGER,
         reference: {
@@ -15,11 +15,11 @@ module.exports = {
         allowNull: false,
       },
 
-      messageId: {
+      userId: {
         type: Sequelize.INTEGER,
         reference: {
           model: {
-            tableName: "Messages",
+            tableName: "Users",
             schema: "schema",
           },
           key: "id",
@@ -27,15 +27,12 @@ module.exports = {
         allowNull: false,
       },
 
-      text: Sequelize.STRING,
-      image: Sequelize.STRING,
-
       updatedAt: { type: Sequelize.DATE, allowNull: false },
       createdAt: { type: Sequelize.DATE, allowNull: false },
     });
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable("Rooms");
+    await queryInterface.dropTable("Connects");
   },
 };
