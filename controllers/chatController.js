@@ -12,7 +12,7 @@ exports.chatFetch = async (chatId, next) => {
 exports.chatList = async (req, res, next) => {
   try {
     const chats = await Chat.findAll({
-      attributes: { exclude: ["createdAt", "updatedAt"] },
+      // attributes: { exclude: ["createdAt", "updatedAt"] },
       include: {
         model: Message,
         as: "messages",
