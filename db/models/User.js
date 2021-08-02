@@ -15,6 +15,14 @@ module.exports = (sequelize, DataTypes) => {
         isEmail: true,
       },
     },
+    image: {
+      type: DataTypes.STRING,
+      defaultValue: "",
+    },
+    bio: {
+      type: DataTypes.STRING,
+      defaultValue: "",
+    },
   });
 
   User.associate = (models) => {

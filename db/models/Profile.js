@@ -25,14 +25,14 @@ module.exports = (sequelize, DataTypes) => {
     source: ["username"],
   });
 
-  Profile.associate = (models) => {
-    models.User.hasOne(Profile, {
-      foreignKey: "userId",
-      alloNull: false,
-    });
+  // Profile.associate = (models) => {
+  //   models.User.hasOne(Profile, {
+  //     foreignKey: "userId",
+  //     alloNull: false,
+  //   });
 
-    Profile.belongsTo(models.User, { foreignKey: "userId" });
-  };
+  //   Profile.belongsTo(models.User, { foreignKey: "userId" });
+  // };
 
   return Profile;
 };

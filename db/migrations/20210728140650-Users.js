@@ -18,6 +18,14 @@ module.exports = {
         allowNull: false,
       },
       email: Sequelize.STRING,
+      image: {
+        type: Sequelize.STRING,
+        defaultValue: "",
+      },
+      bio: {
+        type: Sequelize.STRING,
+        defaultValue: "",
+      },
 
       createdAt: {
         allowNull: false,
