@@ -27,6 +27,8 @@ const generateToken = (user) => {
   const payload = {
     id: user.id,
     username: user.username,
+    image: user.image,
+    bio: user.bio,
     exp: Date.now() + JWT_EXPIRATION_MS,
   };
   const token = jwt.sign(payload, JWT_SECRET);
@@ -49,8 +51,8 @@ exports.profileUpdate = async (req, res, next) => {
     if (req.file) {
       req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
     }
-    await req.profile.update(req.body);
-    res.status(201).json(req.profile);
+    const newProfile = await req.profile.update(req.body);
+    res.status(201).json(newProfile);
   } catch (error) {
     next(error);
   }
