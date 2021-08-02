@@ -8,6 +8,7 @@ const {
   signin,
   fetchProfile,
   profileUpdate,
+  profileData,
 } = require("../controllers/userController");
 
 // const { profileAdd } = require("../controllers/profileController");
@@ -35,5 +36,6 @@ router.param("profileId", async (req, res, next, profileId) => {
 
 //update
 router.put("/userprofile/:profileId", upload.single("image"), profileUpdate);
+router.get("/userprofile/:profileId", profileData);
 
 module.exports = router;
