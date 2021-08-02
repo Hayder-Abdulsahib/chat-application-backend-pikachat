@@ -39,7 +39,7 @@ exports.profileAdd = async (req, res, next) => {
     if (req.file) {
       req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
     }
-    req.body.userId = req.user.id;
+    // req.body.userId = req.user.id;
     const profileAdd = await Profile.create(req.body);
     res.status(201).json(profileAdd);
   } catch (error) {

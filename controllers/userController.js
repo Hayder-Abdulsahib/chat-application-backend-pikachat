@@ -32,3 +32,26 @@ const generateToken = (user) => {
   const token = jwt.sign(payload, JWT_SECRET);
   return token;
 };
+
+// fetchProfile
+exports.fetchProfile = async (profileId, next) => {
+  try {
+    const foundProfile = await User.findByPk(profileId);
+    return foundProfile;
+  } catch (error) {
+    next(error);
+  }
+};
+
+//Update
+exports.profileUpdate = async (req, res, next) => {
+  try {
+    if (req.file) {
+      req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
+    }
+    await req.profile.update(req.body);
+    res.status(201).json(req.profile);
+  } catch (error) {
+    next(error);
+  }
+};
