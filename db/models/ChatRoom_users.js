@@ -5,10 +5,12 @@ module.exports = (sequelize, DataTypes) => {
     models.Chat.belongsToMany(models.User, {
       through: ChatRoom_users,
       foreignKey: "chatId",
+      as: "users",
     });
     models.User.belongsToMany(models.Chat, {
       through: ChatRoom_users,
       foreignKey: "userId",
+      as: "chats",
     });
   };
 
