@@ -1,4 +1,4 @@
-const { Chat, Message, Connect } = require("../db/models");
+const { Chat, Message, Connect, User } = require("../db/models");
 
 exports.chatFetch = async (chatId, next) => {
   try {
@@ -22,12 +22,18 @@ exports.chatList = async (req, res, next) => {
     // });
     const chats = await Chat.findAll({
       // attributes: { exclude: ["createdAt", "updatedAt"] },
-      include: {
-        model: Message,
-        as: "messages",
-        // attributes: ["id"],
-        // we commit this because of react native
-      },
+      include: [
+        {
+          model: Message,
+          as: "messages",
+          // attributes: ["id"],
+          // we commit this because of react native
+        },
+        {
+          model: User,
+          as: "users",
+        },
+      ],
     });
     res.json(chats);
   } catch (error) {
