@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const { JWT_SECRET, JWT_EXPIRATION_MS } = require("../config/keys");
 const jwt = require("jsonwebtoken");
+const { Op } = require("sequelize");
 
 const { User } = require("../db/models");
 
@@ -59,3 +60,18 @@ exports.profileUpdate = async (req, res, next) => {
 };
 //Detail
 exports.profileData = async (req, res) => res.json(req.profile);
+
+exports.profileList = async (req, res, next) => {
+  try {
+    const profiles = await User.findAll({
+      where: {
+        id: {
+          [Op.ne]: req.user.id,
+        },
+      },
+    });
+    res.json(profiles);
+  } catch (error) {
+    next(error);
+  }
+};
