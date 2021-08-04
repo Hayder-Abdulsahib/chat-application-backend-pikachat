@@ -11,23 +11,11 @@ exports.chatFetch = async (chatId, next) => {
 
 exports.chatList = async (req, res, next) => {
   try {
-    // const chats = await Chat.findAll({
-    //   // attributes: { exclude: ["createdAt", "updatedAt"] },
-    //   include: {
-    //     model: Message,
-    //     as: "messages",
-    //     // attributes: ["id"],
-    //     // we commit this because of react native
-    //   },
-    // });
     const chats = await Chat.findAll({
-      // attributes: { exclude: ["createdAt", "updatedAt"] },
       include: [
         {
           model: Message,
           as: "messages",
-          // attributes: ["id"],
-          // we commit this because of react native
         },
         {
           model: User,
@@ -43,23 +31,11 @@ exports.chatList = async (req, res, next) => {
 
 exports.chatDetail = async (req, res, next) => {
   try {
-    // const chats = await Chat.findAll({
-    //   // attributes: { exclude: ["createdAt", "updatedAt"] },
-    //   include: {
-    //     model: Message,
-    //     as: "messages",
-    //     // attributes: ["id"],
-    //     // we commit this because of react native
-    //   },
-    // });
     const chats = await Chat.findOne({
-      // attributes: { exclude: ["createdAt", "updatedAt"] },
       where: { id: req.params.chatId },
       include: {
         model: Message,
         as: "messages",
-        // attributes: ["id"],
-        // we commit this because of react native
       },
     });
     res.json(chats);
@@ -97,39 +73,9 @@ exports.chatCreate = async (req, res, next) => {
   }
 };
 
-//we need to put it above
-//many to many relation
-// exports.sendMessage = async (req, res, next) => {
-//   try {
-//     const newChat = await Chat.create({ userId: req.user.id });
-//     // console.log(req.user.id);
-//     //message-chat part
-//     const chatRoom_msg = req.body.map((message) => ({
-//       ...message,
-//       chatId: newChat.id,
-//     }));
-//     console.log(chatRoom_msg);
-//     await Room.bulkCreate(chatRoom_msg);
-//     const sendMessage1 = {
-//       ...newChat.toJSON(),
-//       messages: req.body,
-//     };
-//     console.log(sendMessage1);
-//     res.status(201).json(sendMessage1);
-//   } catch (error) {
-//     next(error);
-//   }
-// };
-
 //create message
 exports.messageCreate = async (req, res, next) => {
   try {
-    // if (req.chat.userId !== req.user.id) {
-    //   throw {
-    //     status: 401,
-    //     message: "you can't add a mesaage to a group that not yours",
-    //   };
-    // }
     if (req.file) {
       req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
     }

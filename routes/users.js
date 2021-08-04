@@ -12,8 +12,6 @@ const {
   profileList,
 } = require("../controllers/userController");
 
-// const { profileAdd } = require("../controllers/profileController");
-
 router.post("/signup", signup);
 
 router.post(
@@ -37,7 +35,9 @@ router.param("profileId", async (req, res, next, profileId) => {
 
 //update
 router.put("/userprofile/:profileId", upload.single("image"), profileUpdate);
+
 router.get("/userprofile/:profileId", profileData);
+
 router.get(
   "/users",
   passport.authenticate("jwt", { session: false }),

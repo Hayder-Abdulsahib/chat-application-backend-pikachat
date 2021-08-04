@@ -31,11 +31,4 @@ router.delete(
   messageDelete
 );
 
-// router.post(
-//   "/sendmessage",
-//   passport.authenticate("jwt", { session: false }),
-//   upload.single("image"),
-//   sendMessage
-// );
-
 module.exports = router;

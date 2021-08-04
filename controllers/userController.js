@@ -58,6 +58,7 @@ exports.profileUpdate = async (req, res, next) => {
     next(error);
   }
 };
+
 //Detail
 exports.profileData = async (req, res) => res.json(req.profile);
 

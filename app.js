@@ -5,7 +5,6 @@ const db = require("./db/models");
 
 //Routes
 const chatRoutes = require("./routes/chats");
-let profileRouter = require("./routes/profiles");
 const messageRoutes = require("./routes/messages");
 const userRoutes = require("./routes/users");
 
@@ -27,7 +26,6 @@ passport.use(localStrategy);
 passport.use(jwtStrategy);
 
 // Routes
-app.use("/profile", profileRouter);
 app.use("/chats", chatRoutes);
 app.use("/messages", messageRoutes);
 app.use(userRoutes);
