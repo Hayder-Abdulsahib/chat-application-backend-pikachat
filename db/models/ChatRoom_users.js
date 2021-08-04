@@ -1,4 +1,4 @@
-module.exports = (sequelize, DataTypes) => {
+module.exports = (sequelize) => {
   const ChatRoom_users = sequelize.define("Connect", {});
 
   ChatRoom_users.associate = (models) => {

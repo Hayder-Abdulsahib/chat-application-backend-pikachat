@@ -17,14 +17,5 @@ module.exports = (sequelize, DataTypes) => {
     source: ["name"],
   });
 
-  Chat.associate = (models) => {
-    models.User.hasMany(Chat, {
-      foreignKey: "userId",
-      allowNull: false,
-    });
-
-    Chat.belongsTo(models.User, { foreignKey: "userId" });
-  };
-
   return Chat;
 };
